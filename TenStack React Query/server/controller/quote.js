@@ -3,6 +3,7 @@ const Quote = model.Quote;
 
 exports.getAll = async (req, res) => {
   const quotes = await Quote.find().sort({ _id: -1 });
+  console.log("Get All");
   res.json(quotes);
 };
 
