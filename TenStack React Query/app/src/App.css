@@ -1,0 +1,22 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box !important;
+}
+
+body {
+  background: linear-gradient(90deg, rgba(204,204,204,1) 0%, rgba(153,153,153,1) 35%);
+}
+
+.badge:nth-child(1){
+  left: 5% !important;
+}
+
+.badge:nth-child(2){
+  right: 0% !important;
+}
+
+input, textarea{
+  outline: none;
+  border: 0;
+}
