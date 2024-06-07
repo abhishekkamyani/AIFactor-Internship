@@ -22,7 +22,7 @@ export default function QuotesList() {
     queryKey: ["quotes"],
     queryFn: getQuotes,
     refetchOnWindowFocus: false,
-    staleTime: 10000,
+    staleTime: 10000,    
     // retry: 3,
     // retryDelay: 1000,
   });
