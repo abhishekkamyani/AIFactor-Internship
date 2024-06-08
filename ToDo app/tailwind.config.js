@@ -1,10 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{html,js,jsx}",
-    "./node_modules/tw-elements/js/**/*.js",
-  ],
+  content: ["./index.html", "./src/**/*.{html,js,jsx}"],
   theme: {
     extend: {
       colors: {
@@ -17,5 +13,5 @@ export default {
     },
   },
   darkMode: "class",
-  plugins: [require("tw-elements/plugin.cjs")],
+  plugins: [],
 };
