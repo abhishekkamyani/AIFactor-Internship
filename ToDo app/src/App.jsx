@@ -23,7 +23,7 @@ export default function App() {
       <FormNewCardModal /> */}
       <Navbar />
       <Routes>
-        <Route path="/" element={<Cards />}></Route>
+        <Route path="/todos" element={<Cards />}></Route>
         <Route path="/add" element={<AddNewCardFrom />} />
       </Routes>
     </>

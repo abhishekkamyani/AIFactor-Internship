@@ -34,7 +34,7 @@ export default function AddNewCardFrom() {
           Add
         </button>
         <Link
-          to="/"
+          to="/todos"
           className="rounded border-0 w-full text-center bg-red-500 py-2 text-lg text-white hover:bg-red-600"
         >
           Cancel

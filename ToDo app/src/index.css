@@ -13,6 +13,9 @@ p, a, span, li, input, textarea, button{
 }
 
 @layer utilities{
+  .cards-container{
+    @apply border border-neutral-300 py-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 rounded-lg;
+  }
   .card{
     @apply shadow-md drop-shadow-lg shadow-gray-600 min-h-[200px] p-3 rounded;
   }
