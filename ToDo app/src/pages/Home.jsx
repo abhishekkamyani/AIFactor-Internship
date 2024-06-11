@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import Card from "../components/Card";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import CardsLoader from "../components/CardsLoader";
+import { useEffect } from "react";
 
 export default function Home() {
   const fetchTodos = async () => {
@@ -10,31 +11,50 @@ export default function Home() {
     return res.data;
   };
 
-  const { isPending, isSuccess, isError, data, error } = useQuery({
-    queryKey: ["todos"],
-    queryFn: fetchTodos,
-    refetchOnWindowFocus: false,
-    staleTime: 1000 * 60 * 5,
-    // retry: 3,
-    // retryDelay: 1000,
+  const { isPending, isSuccess, isError, isStale, isFetched, data, error } =
+    useQuery({
+      queryKey: ["todos"],
+      queryFn: fetchTodos,
+      refetchOnWindowFocus: false,
+      // staleTime: 1000 * 60 * 5,
+      staleTime: 5000,
+      // retry: 3,
+      // retryDelay: 1000,
 
-    // the dummy data during loading
-    // placeholderData: [
-    //   {
-    //     id: 1,
-    //     heading: "Loading...",
-    //     text: "Please wait...",
-    //     completed: false,
-    //   },
-    // ],
+      // the dummy data during loading
+      // placeholderData: [
+      //   {
+      //     id: 1,
+      //     heading: "Loading...",
+      //     text: "Please wait...",
+      //     completed: false,
+      //   },
+      // ],
 
-    // refresh after interval
-    // refetchInterval: 10000,
-  });
+      // refresh/ refetch data after interval
+      // refetchInterval: 8000,
+    });
+
+  console.log(isSuccess);
 
   if (isError) {
-    return <h1 className="text-center text-red-800 text-3xl font-extrabold">Error: {error.message}</h1>;
+    return (
+      <h1 className="text-center text-red-800 text-3xl font-extrabold">
+        Error: {error.message}
+      </h1>
+    );
   }
+
+  const queryClient = useQueryClient();
+  useEffect(() => {
+    if (isStale && isFetched) {
+      if (
+        window.confirm("The data might be outdated. Would you like to refresh?")
+      ) {
+        queryClient.invalidateQueries("todos");
+      }
+    }
+  }, [isStale]);
 
   return (
     <main className="py-10">
