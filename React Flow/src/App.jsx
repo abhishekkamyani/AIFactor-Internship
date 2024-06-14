@@ -1,62 +1,62 @@
 import { useCallback, useState } from "react";
 import ReactFlow, {
-  Background,
-  Controls,
-  MiniMap,
-  Panel,
   addEdge,
-  useEdgesState,
-  useNodesState,
+  applyEdgeChanges,
+  applyNodeChanges,
 } from "reactflow";
-import defaultNodes from "./nodes";
-import defaultEdges, { edgesSettings } from "./edges";
 import "reactflow/dist/style.css";
 
-export default function App() {
-  const [nodes, setNodes, onNodesChange] = useNodesState(defaultNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(defaultEdges);
-  const [variant, setVariant] = useState("cross");
+import TextUpdaterNode from "./TextUpdaterNode";
 
+import "./text-updater-node.css";
+
+const rfStyle = {
+  backgroundColor: "#B8CEFF",
+};
+
+const initialNodes = [
+  {
+    id: "node-1",
+    type: "textUpdater",
+    position: { x: 0, y: 0 },
+    data: { value: 123 },
+  },
+];
+// we define the nodeTypes outside of the component to prevent re-renderings
+// you could also use useMemo inside the component
+const nodeTypes = { textUpdater: TextUpdaterNode };
+
+function Flow() {
+  const [nodes, setNodes] = useState(initialNodes);
+  const [edges, setEdges] = useState([]);
+
+  const onNodesChange = useCallback(
+    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
+    [setNodes]
+  );
+  const onEdgesChange = useCallback(
+    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+    [setEdges]
+  );
   const onConnect = useCallback(
-    (newConnection) =>
-      setEdges((prevEds) =>
-        addEdge({ ...newConnection, ...edgesSettings }, prevEds)
-      ),
+    (connection) => setEdges((eds) => addEdge({...connection, animated: true}, eds)),
     [setEdges]
   );
 
-  const nodeColor = (node) => {
-    switch (node.type) {
-      case "input":
-        return "pink";
-      case "output":
-        return "tomato";
-      default:
-        return "blue";
-    }
-  };
-
   return (
-    <div style={{ width: "100vw", height: "100vh" }}>
+    <div style={{ width: "100%", height: "100vh" }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-      >
-        <Controls />
-        <MiniMap nodeColor={nodeColor} zoomable pannable />
-        <Background variant={variant} gap={12} size={2} color="green" />
-        {/* variant = dots, cross, lines */}
-
-        <Panel position="top-center">
-          <div>Background Variant</div>
-          <button onClick={() => setVariant("dots")}>dots</button>
-          <button onClick={() => setVariant("lines")}>lines</button>
-          <button onClick={() => setVariant("cross")}>cross</button>
-        </Panel>
-      </ReactFlow>
+        nodeTypes={nodeTypes}
+        fitView
+        style={rfStyle}
+      />
     </div>
   );
 }
+
+export default Flow;
