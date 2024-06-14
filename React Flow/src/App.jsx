@@ -1,44 +1,40 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import ReactFlow, {
   Background,
   Controls,
-  MarkerType,
   MiniMap,
+  Panel,
   addEdge,
   useEdgesState,
   useNodesState,
 } from "reactflow";
-
+import defaultNodes from "./nodes";
+import defaultEdges, { edgesSettings } from "./edges";
 import "reactflow/dist/style.css";
 
-const initialNodes = [
-  { id: "1", position: { x: 0, y: 0 }, data: { label: "1" }, type: "input" },
-  { id: "2", position: { x: 0, y: 100 }, data: { label: "2" } },
-];
-
-const initialEdges = [
-  {
-    id: "e1-2",
-    source: "1",
-    target: "2",
-    label: "1 to 2",
-    type: "smoothstep",
-    animated: true,
-    style: { stroke: "red" },
-    markerEnd: { type: MarkerType.Arrow },
-  },
-];
-// type: "step, smoothstep, straight"
-//MarkerType = Arrow, ArrowClosed
-
 export default function App() {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState(defaultNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(defaultEdges);
+  const [variant, setVariant] = useState("cross");
 
   const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
+    (newConnection) =>
+      setEdges((prevEds) =>
+        addEdge({ ...newConnection, ...edgesSettings }, prevEds)
+      ),
     [setEdges]
   );
+
+  const nodeColor = (node) => {
+    switch (node.type) {
+      case "input":
+        return "pink";
+      case "output":
+        return "tomato";
+      default:
+        return "blue";
+    }
+  };
 
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
@@ -50,9 +46,16 @@ export default function App() {
         onConnect={onConnect}
       >
         <Controls />
-        <MiniMap />
-        <Background variant="dots" gap={12} size={1} color="green" />
+        <MiniMap nodeColor={nodeColor} zoomable pannable />
+        <Background variant={variant} gap={12} size={2} color="green" />
         {/* variant = dots, cross, lines */}
+
+        <Panel position="top-center">
+          <div>Background Variant</div>
+          <button onClick={() => setVariant("dots")}>dots</button>
+          <button onClick={() => setVariant("lines")}>lines</button>
+          <button onClick={() => setVariant("cross")}>cross</button>
+        </Panel>
       </ReactFlow>
     </div>
   );
