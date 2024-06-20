@@ -18,18 +18,19 @@ export default function CustomEdge({ id, sourceX, sourceY, targetX, targetY, lab
     <>
       <BaseEdge id={id} path={edgePath} />
       <EdgeLabelRenderer>
-        <div
+      <button
           style={{
-            background: "white",
-            padding:"5px",
-            position: "absolute",
+            position: 'absolute',
             transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
-            pointerEvents: "all",
+            pointerEvents: 'all',
           }}
           className="nodrag nopan"
+          onClick={() => {
+            setEdges((es) => es.filter((e) => e.id !== id));
+          }}
         >
-          {label}
-        </div>
+          Delete {label}
+        </button>
       </EdgeLabelRenderer>
     </>
   );
