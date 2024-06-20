@@ -45,6 +45,7 @@ const initialEdges = [
     target: "node-2",
     sourceHandle: "a",
     type: "custom-edge",
+    label: "label-1",
   },
   {
     id: "edge-2",
@@ -52,6 +53,7 @@ const initialEdges = [
     target: "node-3",
     sourceHandle: "b",
     type: "custom-edge",
+    label: "label-2",
   },
 ];
 
