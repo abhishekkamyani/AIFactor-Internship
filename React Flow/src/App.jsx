@@ -26,14 +26,14 @@ const initialNodes = [
     type: "output",
     targetPosition: "top",
     position: { x: 0, y: 200 },
-    data: { label: "node 2" },
+    data: { label: "node 2 | output" },
   },
   {
     id: "node-3",
     type: "output",
     targetPosition: "top",
     position: { x: 200, y: 200 },
-    data: { label: "node 3" },
+    data: { label: "node 3 | output" },
   },
 ];
 

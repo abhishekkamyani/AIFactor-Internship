@@ -4,11 +4,14 @@
     padding: 5px;
     border-radius: 5px;
     background: white;
+    border: 0.5px solid black;
+    cursor: grab;
   }
   
   .text-updater-node label {
     display: block;
     color: #777;
     font-size: 12px;
+    cursor: grab;
   }
   

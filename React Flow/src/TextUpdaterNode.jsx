@@ -8,7 +8,6 @@ function TextUpdaterNode({ data, isConnectable }) {
     console.log(evt.target.value);
   }, []);
 
-  console.log(data);
 
   return (
     <div className="text-updater-node">
