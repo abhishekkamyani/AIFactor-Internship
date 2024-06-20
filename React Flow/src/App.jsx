@@ -9,6 +9,7 @@ import "reactflow/dist/style.css";
 import TextUpdaterNode from "./TextUpdaterNode";
 
 import "./text-updater-node.css";
+import CustomEdge from "./CustomEdge";
 
 const rfStyle = {
   backgroundColor: "#B8CEFF",
@@ -38,13 +39,26 @@ const initialNodes = [
 ];
 
 const initialEdges = [
-  { id: "edge-1", source: "node-1", target: "node-2", sourceHandle:"a" },
-  { id: "edge-2", source: "node-1", target: "node-3", sourceHandle:"b" },
+  {
+    id: "edge-1",
+    source: "node-1",
+    target: "node-2",
+    sourceHandle: "a",
+    type: "custom-edge",
+  },
+  {
+    id: "edge-2",
+    source: "node-1",
+    target: "node-3",
+    sourceHandle: "b",
+    type: "custom-edge",
+  },
 ];
 
 // we define the nodeTypes outside of the component to prevent re-renderings
 // you could also use useMemo inside the component
 const nodeTypes = { textUpdater: TextUpdaterNode };
+const edgeTypes = { "custom-edge": CustomEdge };
 
 function Flow() {
   const [nodes, setNodes] = useState(initialNodes);
@@ -73,6 +87,7 @@ function Flow() {
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         fitView
         style={rfStyle}
       />
