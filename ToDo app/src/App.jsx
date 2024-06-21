@@ -3,6 +3,7 @@ import Cards from "./pages/Home";
 import Navbar from "./components/Navbar";
 import AddNewCardFrom from "./pages/AddNewCardForm";
 import { useEffect } from "react";
+import Carousel from "./components/Carousel";
 
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
       </main>
       <FormNewCardModal /> */}
       <Navbar />
+      <Carousel />
       <Routes>
         <Route path="/todos" element={<Cards />}></Route>
         <Route path="/add" element={<AddNewCardFrom />} />
