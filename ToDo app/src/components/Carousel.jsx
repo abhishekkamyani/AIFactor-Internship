@@ -20,15 +20,14 @@ export default function Carousel() {
   const updateSlide = () => {
     const slides = document.querySelectorAll(".slide");
     slides.forEach((slide, index) => {
+        slide.classList.add("opacity-0");
         if (index === current) {
             slide.classList.remove("hidden");
             slide.classList.remove("opacity-0");
-            console.log(index);
         }
-        else{
-            slide.classList.add("hidden");
-            slide.classList.add("opacity-0");
-        }
+        // else{
+            // slide.classList.add("hidden");
+        // }
     })
   }
 
@@ -54,7 +53,7 @@ export default function Carousel() {
     <section className="bg-gray-400 relative container w-11/12 mx-auto">
       {testimonials.map((testimonial, index) => (
 //        {/* <div className={`auto slide ${index!==current && "hidden"}`} key={index}> */}
-        <div className="hidden slide duration-1000 transition-all opacity-0" key={index}>
+        <div className="slide duration-1000 transition-all opacity-0" key={index}>
           <div className="w-60 mx-auto">
             <img src={testimonial.imagePath} className="w-full" />
           </div>
