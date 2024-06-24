@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from 'react'
 import { EdgeLabelRenderer, Handle, useNodes, useNodesState } from 'reactflow'
 
 function AND({ data }) {
-  console.log(data);
+  console.log(data); 
 
   return (
     <div className='w-40 h-24 relative'>
