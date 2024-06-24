@@ -20,12 +20,12 @@ import Output from "./components/nodes/Output";
 const nodeTypes = { "and": AND, "switchButton": SwitchButton, "light": Output };
 
 const initialNodes = [
-  { id: "1", position: { x: 0, y: 0 }, type: "and", data: { label: "1" } },
+  // { id: "1", position: { x: 0, y: 0 }, type: "and", data: { label: "1" }, parentId: "3" },
   // { id: "2", position: { x: 0, y: 100 }, data: { label: "2" } },
-  { id: "3", position: { x: 0, y: 200 }, type: "switchButton", data: { label: "2" }, dragHandle: '.custom-drag-handle' },
+  // { id: "3", position: { x: 0, y: 200 }, type: "switchButton", data: { label: "2" }, dragHandle: '.custom-drag-handle' },
   // { id: "4", position: { x: 0, y: 300 }, type: "light", data: { label: "2" } },
 ];
-const initialEdges = [{ id: "e1-3", source: "1", target: "3", handleTarget:"a" }];
+const initialEdges = [{ id: "e1-3", source: "3", target: "1", targetHandle: "inputA" }];
 
 let id = 0;
 const getNodeID = () => `Node_${id++}`;
@@ -40,6 +40,14 @@ function App() {
     (params) => {
       console.log(params);
       setEdges((eds) => addEdge(params, eds))
+      setNodes((nds) => nds.map(node => {
+        // console.log(params);
+        if (node.id == params.target) {
+          node.data = { ...node.data, source: {...node.data.source, [params.targetHandle]: params.source } };
+          return node;
+        }
+        return node;
+      }))
     },
     [setEdges]
   );
