@@ -20,12 +20,12 @@ import Output from "./components/nodes/Output";
 const nodeTypes = { "and": AND, "switchButton": SwitchButton, "light": Output };
 
 const initialNodes = [
-  // { id: "1", position: { x: 0, y: 0 }, type: "and", data: { label: "1" } },
+  { id: "1", position: { x: 0, y: 0 }, type: "and", data: { label: "1" } },
   // { id: "2", position: { x: 0, y: 100 }, data: { label: "2" } },
-  // { id: "3", position: { x: 0, y: 200 }, type: "switchButton", data: { label: "2" }, dragHandle: '.custom-drag-handle' },
+  { id: "3", position: { x: 0, y: 200 }, type: "switchButton", data: { label: "2" }, dragHandle: '.custom-drag-handle' },
   // { id: "4", position: { x: 0, y: 300 }, type: "light", data: { label: "2" } },
 ];
-const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];
+const initialEdges = [{ id: "e1-3", source: "1", target: "3", handleTarget:"a" }];
 
 let id = 0;
 const getNodeID = () => `Node_${id++}`;
@@ -37,7 +37,10 @@ function App() {
   const { screenToFlowPosition } = useReactFlow();
 
   const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
+    (params) => {
+      console.log(params);
+      setEdges((eds) => addEdge(params, eds))
+    },
     [setEdges]
   );
 
