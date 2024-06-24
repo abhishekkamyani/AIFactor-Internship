@@ -21,9 +21,15 @@ export default function Sidebar() {
         </div>
         {/* items */}
         <nav className="bg-gray-200 basis-full pt-5 select-none">
-          <ul className="flex flex-col gap-10 items-center justify-center">
-            <li className="border-b px-2 md:px-12 pb-2 border-black">
-              <img src="./images/AND.png" className="h-full w-full" onDragStart={(e) => onDragStart(e, "AND")} />
+          <ul className="flex flex-col items-center gap-y-5">
+            <li className="sidebar-item">
+              <img src="./images/AND.png" className="sidebar-item-img" onDragStart={(e) => onDragStart(e, "and")} />
+            </li>
+            <li className="sidebar-item">
+              <img src="./images/Switch-Off.png" className="sidebar-item-img border border-black" onDragStart={(e) => onDragStart(e, "switchButton")} />
+            </li>
+            <li className="sidebar-item">
+              <img src="./images/Light-Off.png" className="sidebar-item-img rotate-90" onDragStart={(e) => onDragStart(e, "light")} />
             </li>
           </ul>
         </nav>

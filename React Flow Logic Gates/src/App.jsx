@@ -11,16 +11,19 @@ import ReactFlow, {
 } from "reactflow";
 
 import "reactflow/dist/style.css";
-import AND from "./componens/nodes/AND";
-import Sidebar from "./componens/Sidebar";
+import AND from "./components/nodes/AND";
+import Sidebar from "./components/Sidebar";
 import { getNodeData } from "../public/utils";
-// import NodePalette from "./componens/nodes/NodePalette";
+import SwitchButton from "./components/nodes/SwitchButton";
+import Output from "./components/nodes/Output";
 
-const nodeTypes = { AND: AND };
+const nodeTypes = { "and": AND, "switchButton": SwitchButton, "light": Output };
 
 const initialNodes = [
-  // { id: "1", position: { x: 0, y: 0 }, type: "AND", data: { label: "1" } },
+  // { id: "1", position: { x: 0, y: 0 }, type: "and", data: { label: "1" } },
   // { id: "2", position: { x: 0, y: 100 }, data: { label: "2" } },
+  // { id: "3", position: { x: 0, y: 200 }, type: "switchButton", data: { label: "2" }, dragHandle: '.custom-drag-handle' },
+  // { id: "4", position: { x: 0, y: 300 }, type: "light", data: { label: "2" } },
 ];
 const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];
 
