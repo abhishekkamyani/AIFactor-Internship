@@ -1,24 +1,16 @@
 import React, { memo, useEffect, useState } from 'react'
 import { Handle, useNodes } from 'reactflow'
+import { useFlow } from '../ReactFlowContext';
 
-function AND({ data }) {
-  // const [inputs, setInputs] = useState([data.inputA, data.inputB]);
+function AND({ data, id }) {
+  const { getNodeOutputData, setNodeOutputData } = useFlow();
+  const inputA = getNodeOutputData(data.source?.inputA);
+  const inputB = getNodeOutputData(data.source?.inputB);
 
-  // const nodes = useNodes();
-  
-  // useEffect(() => {
-  //   const sourceNodes = nodes.filter((node) => {
-  //     if (node.id == data.source?.inputA || node.id == data.source?.inputB) {
-  //       return node.data;
-  //     }
-  //   });
-  //   setInputs(sourceNodes.map(source => source.data.output));
-  // }, [data.source]);
-
-  // console.log(data.source?.inputA);
-
-  const {getNodeState} = data;
-  getNodeState(data.source?.inputA);
+  useEffect(() => {
+    const output = (inputA == 1 && inputB == 1) ? 1 : 0;
+    setNodeOutputData(id, output);
+  }, [inputA, inputB]);
 
   return (
     <div className='w-40 h-24 relative'>

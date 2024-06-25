@@ -1,7 +1,7 @@
 export const getNodeData = (nodeType) => {
   switch (nodeType) {
     case "and":
-      return { inputA: 0, inputB: 0 };
+      return { output: 0 };
 
     case "switchButton":
       return { output: 0 };

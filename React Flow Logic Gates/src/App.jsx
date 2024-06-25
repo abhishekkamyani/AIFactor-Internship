@@ -16,37 +16,24 @@ import Sidebar from "./components/Sidebar";
 import { getNodeData } from "../public/utils";
 import SwitchButton from "./components/nodes/SwitchButton";
 import Output from "./components/nodes/Output";
+import CustomReactFlowProvider, { useFlow } from "./components/ReactFlowContext";
+
 
 const nodeTypes = { "and": AND, "switchButton": SwitchButton, "light": Output };
 
-const initialNodes = [
-  // { id: "1", position: { x: 0, y: 0 }, type: "and", data: { label: "1" }, parentId: "3" },
-  // { id: "2", position: { x: 0, y: 100 }, data: { label: "2" } },
-  // { id: "3", position: { x: 0, y: 200 }, type: "switchButton", data: { label: "2" }, dragHandle: '.custom-drag-handle' },
-  // { id: "4", position: { x: 0, y: 300 }, type: "light", data: { label: "2" } },
-];
-const initialEdges = [{ id: "e1-3", source: "3", target: "1", targetHandle: "inputA" }];
 let id = 0;
 const getNodeID = () => `Node_${id++}`;
 
 function App() {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  const { nodes, setNodes, edges, setEdges, onNodesChange, onEdgesChange } = useFlow();
   const reactFlowWrapper = useRef(null);
   const { screenToFlowPosition } = useReactFlow();
 
-
-  
-  const getNodeState = (id) => {
-    console.log(nodes);
-  }
-
   const onConnect = useCallback(
     (params) => {
-      console.log(params);
       setEdges((eds) => addEdge(params, eds))
       setNodes((nds) => nds.map(node => {
-        // console.log(params);
         if (node.id == params.target) {
           node.data = { ...node.data, source: { ...node.data.source, [params.targetHandle]: params.source } };
           return node;
@@ -54,8 +41,20 @@ function App() {
         return node;
       }))
     },
-    [setEdges]
+    [setEdges, setNodes]
   );
+
+  const onEdgesDelete = useCallback(
+    (deletedEdges) => {
+      setNodes(nds => nds.map(node => {
+        if (node.id == deletedEdges[0].target) {
+          node.data = { ...node.data, source: { ...node.data.source, [deletedEdges[0].targetHandle]: undefined } }
+          return node;
+        }
+        return node;
+      }))
+    }
+    , [setEdges, setNodes])
 
   const onDragOver = useCallback((e) => {
     e.preventDefault();
@@ -65,8 +64,6 @@ function App() {
   const onDrop = useCallback(
     (e) => {
       e.preventDefault();
-      // console.log(e);
-      // console.log(e.dataTransfer.getData("application/reactflow"));
       const nodeType = e.dataTransfer.getData("application/reactflow");
 
       // check if the dropped element is valid
@@ -83,17 +80,14 @@ function App() {
         id: getNodeID(),
         type: nodeType,
         position,
-        data: { ...getNodeData(nodeType), getNodeState },
+        data: { ...getNodeData(nodeType) },
       };
-
-      console.log(newNode);
 
       setNodes((currentNodes) => currentNodes.concat(newNode));
     },
     [screenToFlowPosition]
   );
 
-  // getNodeState();
 
   return (
     <div className="flex h-screen w-screen">
@@ -112,6 +106,7 @@ function App() {
           nodeTypes={nodeTypes}
           onDragOver={onDragOver}
           onDrop={onDrop}
+          onEdgesDelete={onEdgesDelete}
         >
           <Background color="black" size={2} variant="dots" />
           <MiniMap zoomable pannable />
@@ -124,8 +119,10 @@ function App() {
 
 export default () => {
   return (
+    // <CustomReactFlowProvider>
     <ReactFlowProvider>
       <App />
     </ReactFlowProvider>
+    // </CustomReactFlowProvider>
   );
 };

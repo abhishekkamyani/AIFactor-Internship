@@ -7,8 +7,6 @@ export default function Sidebar() {
     e.dataTransfer.setData("application/reactflow", nodeType);
     
     e.dataTransfer.effectAllowed = "move";
-    // console.log(e.dataTransfer.getData("application/reactflow"));
-    // console.log(e);
   };
   return (
     <div className="flex basis-1/5 h-screen bg-black">
