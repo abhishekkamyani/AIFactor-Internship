@@ -21,7 +21,7 @@ function SwitchButton({ data, isConnectable, id }) {
         className="h-full w-full border border-black"
         onClick={handleOnClick}
       />
-      <div className="absolute left-full top-[37%] cursor-move custom-drag-handle py-3">
+      <div className="absolute left-full top-[37%] custom-drag-handle cursor-move custom-drag-handle py-3">
         <div className="bg-black h-px w-14"></div>
         <Handle
           position="right"

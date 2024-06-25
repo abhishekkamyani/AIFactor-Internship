@@ -18,15 +18,21 @@ export default function Sidebar() {
           </span>
         </div>
         {/* items */}
-        <nav className="bg-gray-200 basis-full pt-5 select-none">
+        <nav className="bg-gray-200 basis-full pt-5 select-none overflow-y-auto">
           <ul className="flex flex-col items-center gap-y-5">
             <li className="sidebar-item">
               <img src="./images/AND.png" className="sidebar-item-img" onDragStart={(e) => onDragStart(e, "and")} />
             </li>
             <li className="sidebar-item">
-              <img src="./images/Switch-Off.png" className="sidebar-item-img border border-black" onDragStart={(e) => onDragStart(e, "switchButton")} />
+              <img src="./images/OR.png" className="sidebar-item-img" onDragStart={(e) => onDragStart(e, "or")} />
             </li>
             <li className="sidebar-item">
+              <img src="./images/NOT.png" className="sidebar-item-img" onDragStart={(e) => onDragStart(e, "not")} />
+            </li>
+            <li className="sidebar-item">
+              <img src="./images/Switch-Off.png" className="sidebar-item-img border border-black" onDragStart={(e) => onDragStart(e, "switchButton")} />
+            </li>
+            <li className="sidebar-item border-none">
               <img src="./images/Light-Off.png" className="sidebar-item-img rotate-90" onDragStart={(e) => onDragStart(e, "light")} />
             </li>
           </ul>

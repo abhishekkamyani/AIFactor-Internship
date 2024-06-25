@@ -3,6 +3,12 @@ export const getNodeData = (nodeType) => {
     case "and":
       return { output: 0 };
 
+    case "or":
+      return { output: 0 };
+
+    case "not":
+      return { output: 1 };
+
     case "switchButton":
       return { output: 0 };
 

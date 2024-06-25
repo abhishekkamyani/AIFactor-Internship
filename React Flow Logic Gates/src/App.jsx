@@ -1,7 +1,5 @@
 import React, { useCallback, useRef } from "react";
 import ReactFlow, {
-  useNodesState,
-  useEdgesState,
   addEdge,
   Background,
   MiniMap,
@@ -9,17 +7,19 @@ import ReactFlow, {
   ReactFlowProvider,
   useReactFlow,
 } from "reactflow";
-
 import "reactflow/dist/style.css";
 import AND from "./components/nodes/AND";
 import Sidebar from "./components/Sidebar";
 import { getNodeData } from "../public/utils";
 import SwitchButton from "./components/nodes/SwitchButton";
 import Output from "./components/nodes/Output";
-import CustomReactFlowProvider, { useFlow } from "./components/ReactFlowContext";
+import { useFlow } from "./components/ReactFlowContext";
+import OR from "./components/nodes/OR";
+import NOT from "./components/nodes/NOT";
 
 
-const nodeTypes = { "and": AND, "switchButton": SwitchButton, "light": Output };
+const nodeTypes = { "and": AND, "or": OR, "not": NOT, "switchButton": SwitchButton, "light": Output };
+const edgesStyle = { stroke: "red", strokeWidth: "2px" };
 
 let id = 0;
 const getNodeID = () => `Node_${id++}`;
@@ -32,7 +32,7 @@ function App() {
 
   const onConnect = useCallback(
     (params) => {
-      setEdges((eds) => addEdge(params, eds))
+      setEdges((eds) => addEdge({...params, style: edgesStyle}, eds))
       setNodes((nds) => nds.map(node => {
         if (node.id == params.target) {
           node.data = { ...node.data, source: { ...node.data.source, [params.targetHandle]: params.source } };
@@ -81,6 +81,7 @@ function App() {
         type: nodeType,
         position,
         data: { ...getNodeData(nodeType) },
+        dragHandle: '.custom-drag-handle'
       };
 
       setNodes((currentNodes) => currentNodes.concat(newNode));
@@ -119,10 +120,8 @@ function App() {
 
 export default () => {
   return (
-    // <CustomReactFlowProvider>
     <ReactFlowProvider>
       <App />
     </ReactFlowProvider>
-    // </CustomReactFlowProvider>
   );
 };
