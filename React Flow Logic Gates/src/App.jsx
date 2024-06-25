@@ -26,7 +26,6 @@ const initialNodes = [
   // { id: "4", position: { x: 0, y: 300 }, type: "light", data: { label: "2" } },
 ];
 const initialEdges = [{ id: "e1-3", source: "3", target: "1", targetHandle: "inputA" }];
-
 let id = 0;
 const getNodeID = () => `Node_${id++}`;
 
@@ -36,6 +35,12 @@ function App() {
   const reactFlowWrapper = useRef(null);
   const { screenToFlowPosition } = useReactFlow();
 
+
+  
+  const getNodeState = (id) => {
+    console.log(nodes);
+  }
+
   const onConnect = useCallback(
     (params) => {
       console.log(params);
@@ -43,7 +48,7 @@ function App() {
       setNodes((nds) => nds.map(node => {
         // console.log(params);
         if (node.id == params.target) {
-          node.data = { ...node.data, source: {...node.data.source, [params.targetHandle]: params.source } };
+          node.data = { ...node.data, source: { ...node.data.source, [params.targetHandle]: params.source } };
           return node;
         }
         return node;
@@ -78,7 +83,7 @@ function App() {
         id: getNodeID(),
         type: nodeType,
         position,
-        data: getNodeData(nodeType),
+        data: { ...getNodeData(nodeType), getNodeState },
       };
 
       console.log(newNode);
@@ -87,6 +92,8 @@ function App() {
     },
     [screenToFlowPosition]
   );
+
+  // getNodeState();
 
   return (
     <div className="flex h-screen w-screen">

@@ -1,8 +1,24 @@
 import React, { memo, useEffect, useState } from 'react'
-import { EdgeLabelRenderer, Handle, useNodes, useNodesState } from 'reactflow'
+import { Handle, useNodes } from 'reactflow'
 
 function AND({ data }) {
-  console.log(data);
+  // const [inputs, setInputs] = useState([data.inputA, data.inputB]);
+
+  // const nodes = useNodes();
+  
+  // useEffect(() => {
+  //   const sourceNodes = nodes.filter((node) => {
+  //     if (node.id == data.source?.inputA || node.id == data.source?.inputB) {
+  //       return node.data;
+  //     }
+  //   });
+  //   setInputs(sourceNodes.map(source => source.data.output));
+  // }, [data.source]);
+
+  // console.log(data.source?.inputA);
+
+  const {getNodeState} = data;
+  getNodeState(data.source?.inputA);
 
   return (
     <div className='w-40 h-24 relative'>

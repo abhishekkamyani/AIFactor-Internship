@@ -7,7 +7,9 @@ function SwitchButton({ data, isConnectable }) {
 
   const handleOnClick = () => {
     setOutput(output ? 0 : 1);
+    data.output = output ? 0 : 1;
   };
+
 
 
   return (
