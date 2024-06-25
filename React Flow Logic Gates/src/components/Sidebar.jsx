@@ -9,7 +9,7 @@ export default function Sidebar() {
     e.dataTransfer.effectAllowed = "move";
   };
   return (
-    <div className="flex basis-1/5 h-screen bg-black">
+    <div className="flex basis-1/5 h-screen bg-black select-none">
       {/* sidebar */}
       <div className="w-full bg-gray-800 flex flex-col">
         <div className="flex items-center justify-center basis-1/12 bg-gray-900">
@@ -18,7 +18,7 @@ export default function Sidebar() {
           </span>
         </div>
         {/* items */}
-        <nav className="bg-gray-200 basis-full pt-5 select-none overflow-y-auto">
+        <nav className="bg-gray-200 basis-full pt-5 overflow-y-auto">
           <ul className="flex flex-col items-center gap-y-5">
             <li className="sidebar-item">
               <img src="./images/AND.png" className="sidebar-item-img" onDragStart={(e) => onDragStart(e, "and")} />

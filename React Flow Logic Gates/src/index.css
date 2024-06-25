@@ -19,3 +19,7 @@
         @apply max-h-full max-w-full mx-auto;
     }
 }
+
+.react-flow__attribution{
+    display: none;
+}

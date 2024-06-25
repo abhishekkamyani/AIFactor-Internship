@@ -6,6 +6,7 @@ import ReactFlow, {
   Controls,
   ReactFlowProvider,
   useReactFlow,
+  Panel,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import AND from "./components/nodes/AND";
@@ -32,7 +33,7 @@ function App() {
 
   const onConnect = useCallback(
     (params) => {
-      setEdges((eds) => addEdge({...params, style: edgesStyle}, eds))
+      setEdges((eds) => addEdge({ ...params, style: edgesStyle }, eds))
       setNodes((nds) => nds.map(node => {
         if (node.id == params.target) {
           node.data = { ...node.data, source: { ...node.data.source, [params.targetHandle]: params.source } };
@@ -112,6 +113,9 @@ function App() {
           <Background color="black" size={2} variant="dots" />
           <MiniMap zoomable pannable />
           <Controls />
+          <Panel position="top-center" className="w-full text-center select-none">
+            <h1 className="xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-widest w-full">Logic Gate Simulator</h1>
+          </Panel>
         </ReactFlow>
       </div>
     </div>
