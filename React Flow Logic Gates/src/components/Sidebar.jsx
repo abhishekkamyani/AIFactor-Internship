@@ -4,19 +4,15 @@ export default function Sidebar() {
   const onDragStart = (e, nodeType) => {
     // setData(format, data)
     e.dataTransfer.setData("application/reactflow", nodeType);
-    
+
     e.dataTransfer.effectAllowed = "move";
   };
 
-  
-  const onTouchStart = (e, nodeType) => {
+
+  const onTouchStart = (e) => {
     e.preventDefault();
     e.stopPropagation();
-
-    // setData(format, data)
-    e.dataTransfer.setData("application/reactflow", nodeType);
-    
-    e.dataTransfer.effectAllowed = "move";
+    alert("Touch worked");
   };
 
 
@@ -33,7 +29,7 @@ export default function Sidebar() {
         <nav className="bg-gray-200 basis-full pt-5 overflow-y-auto">
           <ul className="flex flex-col items-center gap-y-5">
             <li className="sidebar-item">
-              <img src="./images/AND.png" className="sidebar-item-img" onTouchStart={(e) => onTouchStart(e, "and")} />
+              <img src="./images/AND.png" className="sidebar-item-img" onTouchStart={onTouchStart} />
             </li>
             <li className="sidebar-item">
               <img src="./images/OR.png" className="sidebar-item-img" onDragStart={(e) => onDragStart(e, "or")} />
