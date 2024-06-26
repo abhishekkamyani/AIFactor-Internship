@@ -2,7 +2,6 @@ import React from "react";
 
 export default function Sidebar() {
   const onDragStart = (e, nodeType) => {
-    
     // setData(format, data)
     e.dataTransfer.setData("application/reactflow", nodeType);
     
@@ -11,7 +10,6 @@ export default function Sidebar() {
 
   
   const onTouchStart = (e, nodeType) => {
-    
     // setData(format, data)
     e.dataTransfer.setData("application/reactflow", nodeType);
     
@@ -32,7 +30,7 @@ export default function Sidebar() {
         <nav className="bg-gray-200 basis-full pt-5 overflow-y-auto">
           <ul className="flex flex-col items-center gap-y-5">
             <li className="sidebar-item">
-              <img src="./images/AND.png" className="sidebar-item-img" onDragStart={(e) => onDragStart(e, "and")} onTouchStart={(e) => onTouchStart(e, "and")} />
+              <img src="./images/AND.png" className="sidebar-item-img" onTouchStart={(e) => onTouchStart(e, "and")} />
             </li>
             <li className="sidebar-item">
               <img src="./images/OR.png" className="sidebar-item-img" onDragStart={(e) => onDragStart(e, "or")} />
