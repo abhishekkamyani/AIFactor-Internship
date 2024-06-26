@@ -12,7 +12,7 @@ export default function Sidebar() {
   const onTouchStart = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    alert("Touch start worked");
+    // alert("Touch start worked");
   };
 
   const onTouchMove = (e) => {
