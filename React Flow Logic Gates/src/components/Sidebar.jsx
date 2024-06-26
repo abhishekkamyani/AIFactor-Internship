@@ -12,7 +12,13 @@ export default function Sidebar() {
   const onTouchStart = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    alert("Touch worked");
+    alert("Touch start worked");
+  };
+
+  const onTouchMove = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    alert("Touch move worked");
   };
 
 
@@ -32,7 +38,7 @@ export default function Sidebar() {
               <img src="./images/AND.png" className="sidebar-item-img" onTouchStart={onTouchStart} />
             </li>
             <li className="sidebar-item">
-              <img src="./images/OR.png" className="sidebar-item-img" onDragStart={(e) => onDragStart(e, "or")} />
+              <img src="./images/OR.png" className="sidebar-item-img" onDragStart={(e) => onDragStart(e, "or")} onTouchMove={onTouchMove} />
             </li>
             <li className="sidebar-item">
               <img src="./images/NOT.png" className="sidebar-item-img" onDragStart={(e) => onDragStart(e, "not")} />
