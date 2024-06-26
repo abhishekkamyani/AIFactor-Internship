@@ -10,6 +10,7 @@ export default function Sidebar() {
 
   
   const onTouchStart = (e, nodeType) => {
+    e.preventDefault();
     // setData(format, data)
     e.dataTransfer.setData("application/reactflow", nodeType);
     
