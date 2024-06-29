@@ -18,44 +18,78 @@ import { useFlow } from "./components/ReactFlowContext";
 import OR from "./components/nodes/OR";
 import NOT from "./components/nodes/NOT";
 
-
-const nodeTypes = { "and": AND, "or": OR, "not": NOT, "switchButton": SwitchButton, "light": Output };
+const nodeTypes = {
+  and: AND,
+  or: OR,
+  not: NOT,
+  switchButton: SwitchButton,
+  light: Output,
+};
 const edgesStyle = { stroke: "red", strokeWidth: "2px" };
 
 let id = 0;
 const getNodeID = () => `Node_${id++}`;
 
 function App() {
-
-  const { nodes, setNodes, edges, setEdges, onNodesChange, onEdgesChange } = useFlow();
+  const { nodes, setNodes, edges, setEdges, onNodesChange, onEdgesChange } =
+    useFlow();
   const reactFlowWrapper = useRef(null);
   const { screenToFlowPosition } = useReactFlow();
 
+  // console.log(edges);
+
   const onConnect = useCallback(
     (params) => {
-      setEdges((eds) => addEdge({ ...params, style: edgesStyle }, eds))
-      setNodes((nds) => nds.map(node => {
-        if (node.id == params.target) {
-          node.data = { ...node.data, source: { ...node.data.source, [params.targetHandle]: params.source } };
+      const { target, targetHandle } = params;
+
+      const isAlreadyConnected = edges.some(
+        (edge) => edge.target === target && edge.targetHandle === targetHandle
+      );
+
+      if (isAlreadyConnected) {
+        return;
+      }
+
+      setEdges((eds) => addEdge({ ...params, style: edgesStyle }, eds));
+      setNodes((nds) =>
+        nds.map((node) => {
+          if (node.id == params.target) {
+            node.data = {
+              ...node.data,
+              source: {
+                ...node.data.source,
+                [params.targetHandle]: params.source,
+              },
+            };
+            return node;
+          }
           return node;
-        }
-        return node;
-      }))
+        })
+      );
     },
-    [setEdges, setNodes]
+    [edges, setEdges, setNodes]
   );
 
   const onEdgesDelete = useCallback(
     (deletedEdges) => {
-      setNodes(nds => nds.map(node => {
-        if (node.id == deletedEdges[0].target) {
-          node.data = { ...node.data, source: { ...node.data.source, [deletedEdges[0].targetHandle]: undefined } }
+      setNodes((nds) =>
+        nds.map((node) => {
+          if (node.id == deletedEdges[0].target) {
+            node.data = {
+              ...node.data,
+              source: {
+                ...node.data.source,
+                [deletedEdges[0].targetHandle]: undefined,
+              },
+            };
+            return node;
+          }
           return node;
-        }
-        return node;
-      }))
-    }
-    , [setEdges, setNodes])
+        })
+      );
+    },
+    [setEdges, setNodes]
+  );
 
   const onDragOver = useCallback((e) => {
     e.preventDefault();
@@ -81,15 +115,14 @@ function App() {
         id: getNodeID(),
         type: nodeType,
         position,
-        data: { ...getNodeData(nodeType) },
-        dragHandle: '.custom-drag-handle'
+        data: getNodeData(nodeType),
+        dragHandle: ".custom-drag-handle",
       };
 
       setNodes((currentNodes) => currentNodes.concat(newNode));
     },
     [screenToFlowPosition]
   );
-
 
   return (
     <div className="flex h-screen w-screen">
@@ -113,8 +146,13 @@ function App() {
           <Background color="black" size={2} variant="dots" />
           <MiniMap zoomable pannable />
           <Controls />
-          <Panel position="top-center" className="w-full text-center select-none">
-            <h1 className="xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-widest w-full">Logic Gate Simulator</h1>
+          <Panel
+            position="top-center"
+            className="w-full text-center select-none"
+          >
+            <h1 className="xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-widest w-full">
+              Logic Gate Simulator
+            </h1>
           </Panel>
         </ReactFlow>
       </div>
