@@ -31,6 +31,19 @@ export default function App() {
     }
   };
 
+
+  const fetchCountries = async () => {
+    try {
+      const response = await axios.get("https://countriesnow.space/api/v0.1/countries/iso");
+      console.log(response.data?.data?.map(country => country.name));
+      return response;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+
   const { data: weather, error } = useQuery({
     queryKey: "weather",
     queryFn: fetchWeather,
@@ -48,16 +61,27 @@ export default function App() {
     // refetchOnReconnect
   });
 
-  console.log(weather);
+  const countries = useQuery({
+    queryKey: "countries",
+    queryFn: fetchCountries,
+    refetchOnWindowFocus: false, 
+    refetchOnWindowBlur: false,
+  })
+
+  // console.log(countries);
 
   return (
-    <div className="">
-      <h1>Work</h1>
-      {/* <MyChart /> */}
-      {/* <Histogram /> */}
-      {/* <BoxPlot /> */}
-      {/* <GaugeChartComponent /> */}
-      <div className="w-full h-96">
+    <div className="py-5">
+      <h1 className="text-center font-extrabold text-3xl">Weather Visualization App</h1>
+      <div className="flex justify-center space-x-20 my-10">
+        <select className="bg-gray-200 p-3 !h-1/2 rounded-lg" name="country" id="country" >
+          <option className="">[-Select Country-]</option>
+        </select>
+        <select className="bg-gray-200 p-3 !h-1/2 rounded-lg" name="city" id="city" >
+          <option className="">[-Select City-]</option>
+        </select>
+      </div>
+      <div className="w-full h-96 my-10">
         <LineChart data={weather?.list} />
       </div>
     </div>
