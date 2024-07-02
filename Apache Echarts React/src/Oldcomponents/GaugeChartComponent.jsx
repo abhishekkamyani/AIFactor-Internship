@@ -14,14 +14,11 @@ const GaugeChartComponent = () => {
   const [value, setValue] = useState(100); // Initial value for the gauge
 
   useEffect(() => {
-    // Start interval to update gauge value
     const interval = setInterval(updateGaugeValue, 1000); // Update every 2 seconds
 
-    // Clean up interval on component unmount
     return () => clearInterval(interval);
   }, []);
 
-//   console.log(value);
 
   const updateGaugeValue = () => {
     // Generate a random value between 0 and 100 for the gauge
