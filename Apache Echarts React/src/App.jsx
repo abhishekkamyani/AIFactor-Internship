@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import MyChart from "./Oldcomponents/MyChart";
-import Histogram from "./Oldcomponents/Histogram";
-import BoxPlot from "./Oldcomponents/BoxPlot";
-import GaugeChartComponent from "./Oldcomponents/GaugeChartComponent";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import LineChart from "./components/charts/LineChart";
 
 export default function App() {
   const fetchWeather = async () => {
@@ -13,6 +10,20 @@ export default function App() {
         "https://api.openweathermap.org/data/2.5/forecast?q=karachi&appid=f4a4c80b35c7d0638a2563b560f4b5e6&units=metric"
       );
       // console.log(response.data);
+
+      if (response.data && response.data.list) {
+        const currentTimestamp = Math.floor(Date.now() / 1000); // Current time in UNIX timestamp
+        const twentyFourHoursLaterTimestamp = currentTimestamp + (24 * 60 * 60); // Timestamp for 6 hours later
+        // Filter data for the next 6 hours
+
+        const filteredData = response.data.list.filter(item => {
+          const timestamp = item.dt;
+          return timestamp >= currentTimestamp && timestamp <= twentyFourHoursLaterTimestamp;
+        });
+
+        response.data.list = filteredData;
+      }
+
       return response.data;
     } catch (error) {
       console.log(error);
@@ -37,16 +48,17 @@ export default function App() {
     // refetchOnReconnect
   });
 
-  console.log(weather?.list);
+  console.log(weather);
 
   return (
-    <div>
-      <div className="w-1/2 lg:w-full">
-        <h1>Work</h1>
-        {/* <MyChart /> */}
-        {/* <Histogram /> */}
-        {/* <BoxPlot /> */}
-        {/* <GaugeChartComponent /> */}
+    <div className="">
+      <h1>Work</h1>
+      {/* <MyChart /> */}
+      {/* <Histogram /> */}
+      {/* <BoxPlot /> */}
+      {/* <GaugeChartComponent /> */}
+      <div className="w-full h-96">
+        <LineChart data={weather?.list} />
       </div>
     </div>
   );
