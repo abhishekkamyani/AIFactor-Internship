@@ -3,7 +3,7 @@ import ReactECharts from "echarts-for-react"; // Import the wrapper
 export default function BoxPlot() {
 
     var data = [
-        [850, 740, 900, 1070, 935],
+        [0, 10, 900, 1070, 935],
         [960, 830, 960, 1080, 960],
         [880, 790, 920, 1070, 990],
         [890, 810, 970, 1140, 1000],

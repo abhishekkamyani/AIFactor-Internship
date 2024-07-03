@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import LineChart from "./components/charts/LineChart";
+import BoxPlot from "./Oldcomponents/BoxPlot";
+import BoxPlotChart from "./components/charts/BoxPlotChart";
+import BoxPlotChart2 from "./components/charts/BoxPlotChart2";
 
 export default function App() {
   const [selectedCountryName, setSelectedCountryName] = useState(null);
@@ -13,7 +16,7 @@ export default function App() {
       const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=f4a4c80b35c7d0638a2563b560f4b5e6&units=metric`
       );
-      // console.log(response.data);
+      console.log(response.data);
 
       if (response.data && response.data.list) {
         const currentTimestamp = Math.floor(Date.now() / 1000); // Current time in UNIX timestamp
@@ -57,7 +60,8 @@ export default function App() {
         "https://countriesnow.space/api/v0.1/countries/cities",
         { country: countryName }
       );
-      return response?.data?.data;
+
+      return response?.data?.data.sort();
     } catch (error) {
       console.log(error);
       throw error;
@@ -148,7 +152,10 @@ export default function App() {
             isLoading={weather.isLoading}
             isError={weather.isError}
           />
-         )} 
+        )} 
+        <BoxPlot />
+        <BoxPlotChart />
+        <BoxPlotChart2 />
       </div>
     </div>
   );
