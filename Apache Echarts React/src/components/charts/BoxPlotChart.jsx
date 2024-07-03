@@ -62,6 +62,8 @@ const BoxPlotChart = () => {
         median,
         q3,
         max,
+        10,
+        20,1
         // Math.max(...filteredData),
         // ...group.filter(x => x < lowerBound || x > upperBound)
       ];
@@ -70,17 +72,18 @@ const BoxPlotChart = () => {
 
   const getOption = () => {
     const boxPlotData = calculateBoxPlotData(salesData);
+    console.log(boxPlotData);
 
     return {
       title: {
         text: "Sales Performance Box Plot",
         left: "center",
       },
-      tooltip: {
-        trigger: "item",
-        axisPointer: {
-          type: "shadow",
-        },
+      tooltip: {  
+        // trigger: "item",
+        // axisPointer: {
+        //   type: "shadow",
+        // },
       },
       legend: { show: true, right: "0" },
       yAxis: {

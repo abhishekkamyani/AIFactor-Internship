@@ -17,22 +17,21 @@ export default function BoxPlot() {
         tooltip: {
           
         },
+        legend: { show: true, right: "0" },
         xAxis: {
           type: 'category',
           data: ['Category A', 'Category B', 'Category C', 'Category D', 'Category E']
         },
         yAxis: {
           type: 'value',
-          name: 'Value'
+          name: 'Values'
         },
         series: [
           {
             name: 'Box Plot',
             type: 'boxplot',
             data: data,
-            itemStyle: {
-              color: '#5470C6'
-            }
+            
           }
         ]
       };
