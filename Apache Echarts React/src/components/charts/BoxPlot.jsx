@@ -3,7 +3,6 @@ import * as echarts from 'echarts/core';
 import { BoxplotChart } from 'echarts/charts';
 import { TooltipComponent, TitleComponent, DatasetComponent, LegendComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-
 import { total_bill } from '/public/utils';
 import { getBoxPlotData } from '/public/utils';
 
@@ -30,6 +29,10 @@ const option = {
     tooltip: {},
     legend: { show: true },
     yAxis: {
+        type: "category",
+        data: ["Total-Balance"]
+    },
+    xAxis: {
         type: "value",
         name: "Rupees",
         splitArea: {
@@ -37,10 +40,7 @@ const option = {
         },
         splitLine: { show: false },
         scale: true
-    },
-    xAxis: {
-        type: "category",
-        data: ["Total-Balance"]
+
     },
     series: [
         {
@@ -51,7 +51,7 @@ const option = {
         {
             name: "Total-Balance Outliers",
             type: "scatter",
-            data: outliers.map(outlier => [0, outlier]),
+            data: outliers.map(outlier => [outlier, 0]),
             symbolSize: 7,
             symbol: 'circle',
             itemStyle: {
