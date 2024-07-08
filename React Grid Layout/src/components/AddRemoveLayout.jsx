@@ -1,4 +1,4 @@
-import { useState } from "react";
+import _ from "lodash";
 
 export default function AddRemoveLayout({
     className = "layout",
@@ -29,6 +29,10 @@ export default function AddRemoveLayout({
                 h: 2,
             }
         ])
+    }
+
+    const onRemoveItem = (i) => {
+        setItems(_.reject(items, {i, i}));
     }
 
     return <div>AddRemoveLayout</div>;
