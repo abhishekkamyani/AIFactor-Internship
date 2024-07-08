@@ -25,7 +25,7 @@ export default function MyFirstGrid() {
         c
       </div>
 
-      <div key="d" data-grid={{ x: 0, y: 0, w: 1, h: 2, static: true }} className="bg-cyan-300">
+      <div key="d" onClick={() => console.log("clicked")} data-grid={{ x: 0, y: 0, w: 1, h: 2, static: true }} className="bg-cyan-300">
         d
       </div>
       <div key="e" data-grid={{ x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 }} className="bg-slate-500">
