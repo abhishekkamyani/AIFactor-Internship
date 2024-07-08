@@ -45,12 +45,12 @@ const MyResponsiveGridLayout = () => {
   }, []);
 
   // Save layouts to localStorage whenever they change, only if it's not loading
-  const handleLayoutChange = (layout, allLayouts) => {
-    if (!isLoading) {
-      setLayouts(allLayouts);
-      localStorage.setItem('responsiveGridLayouts', JSON.stringify(allLayouts));
-    }
-  };
+    const handleLayoutChange = (layout, allLayouts) => {
+        if (!isLoading) {
+        setLayouts(allLayouts);
+        localStorage.setItem('responsiveGridLayouts', JSON.stringify(allLayouts));
+        }
+    };
 
   if (isLoading) {
     return <div>Loading...</div>; // Show a loading message or spinner if needed
