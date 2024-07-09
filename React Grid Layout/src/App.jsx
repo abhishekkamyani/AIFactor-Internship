@@ -8,7 +8,7 @@ import MyResponsiveGridLayout from "./components/grids/ResponsiveLocalStorageLay
 import AddRemoveWithLS from "./components/grids/AddRemoveWithLS";
 import DragDropGridLayout from "./components/grids/DragDropGridLayout";
 import Histogram from "./components/charts/Histogram";
-import LayoutChartsLS from "./components/grids/LayoutChartsLS";
+import Dashboard from "./components/grids/Dashboard";
 
 export default function App() {
   return (
@@ -25,7 +25,7 @@ export default function App() {
       <Histogram />
       </div> */}
 
-      <LayoutChartsLS />
+      <Dashboard />
     </div>
   );
 }

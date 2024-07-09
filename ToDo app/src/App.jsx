@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Cards from "./pages/Home";
 import Navbar from "./components/Navbar";
 import AddNewCardFrom from "./pages/AddNewCardForm";
+import PricingCards from "./pages/PricingCards";
 
 
 export default function App() {
@@ -20,7 +21,10 @@ export default function App() {
         </div>
       </main>
       <FormNewCardModal /> */}
-      <Navbar />
+      {/* <Navbar /> */}
+      {/* <div className="py-32"> */}
+      <PricingCards />
+      {/* </div> */}
       <Routes>
         <Route path="/todos" element={<Cards />}></Route>
         <Route path="/add" element={<AddNewCardFrom />} />
