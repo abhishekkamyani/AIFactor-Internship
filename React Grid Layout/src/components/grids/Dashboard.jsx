@@ -10,7 +10,7 @@ const defaultLayouts = {
   lg: [
     { i: 'a', x: 0, y: 0, w: 4, h: 10, minW: 4, minH: 10 },
     { i: 'b', x: 6, y: 0, w: 5, h: 10, minW: 5, minH: 10 },
-    { i: 'c', x: 1, y: 10, w: 10, h: 10, minH: 5 },
+    { i: 'c', x: 1, y: 10, w: 10, h: 10, minH:7, minW: 7},
   ],
  
 } 
@@ -23,7 +23,7 @@ const Dashboard = () => {
   useEffect(() => {
     const savedLayouts = localStorage.getItem('responsiveGridLayouts');
     if (savedLayouts) {
-      // setLayouts(JSON.parse(savedLayouts));
+      setLayouts(JSON.parse(savedLayouts));
     }
     setIsLoading(false); // Set loading to false after attempting to load the layouts
   }, []);
@@ -32,7 +32,7 @@ const Dashboard = () => {
   const handleLayoutChange = (layout, allLayouts) => {
     if (!isLoading) {
       setLayouts(allLayouts);
-      // localStorage.setItem('responsiveGridLayouts', JSON.stringify(allLayouts));
+      localStorage.setItem('responsiveGridLayouts', JSON.stringify(allLayouts));
     }
   };
 
