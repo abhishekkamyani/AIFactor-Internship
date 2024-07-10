@@ -24,7 +24,7 @@ export default function Histogram() {
     xAxis: {
       type: "category",
       data: binNames,
-      name: "Bins",
+      // name: "Bins",
     },
     yAxis: {
       type: "value",
@@ -41,5 +41,5 @@ export default function Histogram() {
     ],
   };
 
-  return <ReactECharts option={option} className="!h-full !w-full border-2 rounded-xl bg-slate-100 px-12 py-8 shadow-lg m-1" />;
+  return <ReactECharts option={option} className="!h-full !w-full" />;
 }

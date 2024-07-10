@@ -28,6 +28,8 @@ const Gauge = () => {
   const option = {
     title: {
       text: "Gauge Chart",
+      left: "5%",
+      top: "5%",
     },
     tooltip: {
     },
@@ -35,7 +37,7 @@ const Gauge = () => {
       {
         name: "Business Indicator",
         type: "gauge",
-        data: [{ value: value, name: "Completion Rate" }],
+        data: [{ value: value }],
       },
     ],
   };
@@ -44,7 +46,7 @@ const Gauge = () => {
       <ReactECharts
         echarts={echarts}
         option={option}
-        className="!w-full !h-full border-2 rounded-xl bg-slate-100 px-12 py-8 shadow-lg"
+        className="!w-full !h-full"
         // notMerge={true} // Ensure updates replace previous data
       />
   );

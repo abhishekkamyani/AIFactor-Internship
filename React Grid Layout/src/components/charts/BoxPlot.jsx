@@ -15,15 +15,15 @@ const { boxData, outliers } = getBoxPlotData(total_bill);
 const option = {
     title: [
         {
-            text: "Box Plot",
-            borderColor: "#999",
-            borderWidth: 1,
-            textStyle: {
-                fontWeight: "normal",
-                fontSize: 10,
-                lineHeight: 15,
-            },
-            right: "10%",
+            // text: "Box Plot",
+            // borderColor: "#999",
+            // borderWidth: 1,
+            // textStyle: {
+            //     fontWeight: "normal",
+            //     fontSize: 10,
+            //     lineHeight: 15,
+            // },
+            // right: "10%",
         }
     ],
     tooltip: {},
@@ -69,7 +69,7 @@ export default function BoxPlot() {
             option={option}
             notMerge={true}
             lazyUpdate={true}
-            className='!h-full !w-full border-2 rounded-xl bg-slate-100 px-12 py-8 shadow-lg'
+            className='!h-full !w-full'
         />
     )
 }

@@ -8,7 +8,7 @@ export default function PricingCards() {
           className="absolute top-0 left-0 w-full h-[20px] bg-black"
           style={{ transform: "skewY(-6deg)", transformOrigin: "top" }} 
         ></div> */}
-        <div className="bg-white border-b-8 border-black w-[102vw] -left-6 h-36 absolute rotate-[-4deg] top-[-9%]">
+        <div className="bg-white border-b-[12px] border-black w-[102vw] -left-6 h-36 absolute rotate-[-4deg] top-[-9%]">
 
         </div>
         <div className="bg-cyan-500 ">
