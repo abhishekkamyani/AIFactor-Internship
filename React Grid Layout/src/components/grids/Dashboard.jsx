@@ -19,16 +19,14 @@ const Dashboard = () => {
   const [layouts, setLayouts] = useState(defaultLayouts);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Load layouts from localStorage
   useEffect(() => {
     const savedLayouts = localStorage.getItem('responsiveGridLayouts');
     if (savedLayouts) {
       setLayouts(JSON.parse(savedLayouts));
     }
-    setIsLoading(false); // Set loading to false after attempting to load the layouts
+    setIsLoading(false); 
   }, []);
 
-  // Save layouts to localStorage whenever they change, only if it's not loading
   const handleLayoutChange = (layout, allLayouts) => {
     if (!isLoading) {
       setLayouts(allLayouts);
@@ -37,7 +35,7 @@ const Dashboard = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>; // Show a loading message or spinner if needed
+    return <div>Loading...</div>; 
   }
 
   return (
