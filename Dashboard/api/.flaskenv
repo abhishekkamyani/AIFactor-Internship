@@ -1,0 +1,2 @@
+FLASK_APP=dashboard_api.py
+FLASK_ENV=development
